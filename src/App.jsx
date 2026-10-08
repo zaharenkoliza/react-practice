@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import UserList from './components/UserList'
+import UserFilters from './components/UserFilters/UserFilters'
 
 const usersData = [
   {id: 1, name: 'Anna', online: true},
@@ -12,6 +13,7 @@ function App() {
   const [onlyOnline, setOnlyOnline] = useState(false);
   const [users, setUsers] = useState(usersData);
   const [searchText, setSearchText] = useState('');
+  const [sortOrder, setSortOrder] = useState("default");
 
   const visibleUsers = onlyOnline
     ? users
@@ -20,7 +22,11 @@ function App() {
         user.name.toLowerCase().includes(searchText.toLowerCase()))
     : users
         .filter(user =>
-        user.name.toLowerCase().includes(searchText.toLowerCase()))
+        user.name.toLowerCase().includes(searchText.toLowerCase()));
+
+  if (sortOrder === 'name') {
+    visibleUsers.sort((a, b) => a.name.localeCompare(b.name));
+  }
 
   const toggleUser = (id) => {
     setUsers(
@@ -37,8 +43,19 @@ function App() {
 
   return (
     <main>
-      <input aria-label="Поиск по имени" type="text" onChange={(e) => setSearchText(e.target.value)} value={searchText} />
-      <UserList users={visibleUsers} toggleUser={toggleUser} onlyOnline={onlyOnline} setOnlyOnline={setOnlyOnline}/>
+      <h1>Пользователи</h1>
+      <UserFilters 
+        onlyOnline={onlyOnline}
+        setOnlyOnline={setOnlyOnline}
+        searchText={searchText}
+        setSearchText={setSearchText}
+        sortOrder={sortOrder}
+        onSortChange={setSortOrder}
+      />
+      <UserList 
+        users={visibleUsers} 
+        toggleUser={toggleUser}
+      />
     </main>
   )
 }

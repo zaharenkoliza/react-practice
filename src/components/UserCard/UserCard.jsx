@@ -1,7 +1,9 @@
+import styles from './UserCard.module.css'
+
 export default function UserCard({ user, onToggle }) {
 
   return (
-    <article>
+    <article className={styles.card}>
       <h2>{user.name}</h2>
       <p>{user.online ? 'Онлайн' : 'Оффлайн'}</p>
       <button

@@ -1,16 +1,23 @@
-import UserCard from "./UserCard";
+import UserCard from "./UserCard/UserCard";
 
-export default function UserList({ users, toggleUser, onlyOnline, setOnlyOnline }) {
+export default function UserList({ 
+    users, 
+    toggleUser 
+}) {
 
-  return users.length == 0
-        ? <h2>Никого нет</h2>
-        : <>
-            <button
-                onClick={() => setOnlyOnline(!onlyOnline)}
-            >Показать {!onlyOnline ? 'только online' : 'всех'}</button>
+    if (users.length == 0) {
+        return <p>Пользователи не найдены.</p>
+    }
+
+  return (
+        <div>
             {users.map(user => (
-                <UserCard user={user} key={user.id} onToggle={toggleUser}/>
+                <UserCard 
+                    user={user}     
+                    key={user.id} 
+                    onToggle={toggleUser}/>
             ))}
             <p>Всего: {users.length}</p>
-        </>
+        </div>
+    )
 }
