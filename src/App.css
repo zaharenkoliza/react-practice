@@ -1,0 +1,8 @@
+/* Стартовое оформление. На практике перенесём стили в CSS Modules. */
+article {
+  margin-top: 16px;
+  padding: 20px;
+  border: 1px solid #d7dce5;
+  border-radius: 12px;
+  background: white;
+}
