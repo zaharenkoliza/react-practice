@@ -1,3 +1,88 @@
 .card {
-    background-color:aqua;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  box-shadow: 0 4px 16px rgb(32 38 57 / 3%);
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.avatar {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 16px;
+  color: var(--color-accent);
+  background: #eeecfb;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.name {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 650;
+}
+
+.name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.name a:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 13px;
+}
+
+.status::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  content: '';
+}
+
+.online {
+  color: #23734c;
+}
+
+.offline {
+  color: var(--color-muted);
+}
+
+.button {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-accent);
+  background: var(--color-surface);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.button:hover {
+  border-color: #b6afe7;
+  background: #f5f3ff;
+}
+
+.button:active {
+  background: #eeecfb;
 }
