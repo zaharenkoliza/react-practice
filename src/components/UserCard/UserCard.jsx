@@ -1,4 +1,5 @@
 import styles from './UserCard.module.css'
+import { Link } from 'react-router'
 
 export default function UserCard({ user, onToggle }) {
   return (
@@ -8,7 +9,9 @@ export default function UserCard({ user, onToggle }) {
           {user.name.slice(0, 1)}
         </span>
         <div>
-          <h2 className={styles.name}>{user.name}</h2>
+          <h2 className={styles.name}>
+            <Link to={`/users/${user.id}`}>{user.name}</Link>
+          </h2>
           <p className={`${styles.status} ${user.online ? styles.online : styles.offline}`}>
             {user.online ? 'Онлайн' : 'Оффлайн'}
           </p>

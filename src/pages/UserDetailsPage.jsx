@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router";
 import UserCard from "../components/UserCard/UserCard";
+import styles from '../App.module.css';
 
 export default function UserDetailsPage({ users, toggleUser }) {
     const { userId } = useParams();
@@ -8,7 +9,7 @@ export default function UserDetailsPage({ users, toggleUser }) {
     if (!user) {
         return (
             <>
-                <h1>Игрок не найден</h1>
+                <h1 className={styles.title}>Игрок не найден</h1>
                 <Link to="/users">К списку игроков</Link>
             </>
         )

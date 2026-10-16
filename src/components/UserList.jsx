@@ -1,11 +1,11 @@
 import UserCard from './UserCard/UserCard'
 import styles from './UserList.module.css'
 
-export default function UserList({ users, toggleUser }) {
+export default function UserList({ users, toggleUser, emptyMessage = 'Пользователи не найдены.' }) {
   if (users.length === 0) {
     return (
       <div className={styles.empty} role="status">
-        <p>Пользователи не найдены.</p>
+        <p>{emptyMessage}</p>
       </div>
     )
   }
