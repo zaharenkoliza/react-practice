@@ -43,3 +43,40 @@ it('показывает сообщения для неизвестного иг
         screen.queryByRole('button', { name: 'Изменить статус'} ),
     ).not.toBeInTheDocument()
 })
+
+it('поиск оставляет только подходящего игрока', () => {
+    renderApp('/users')
+
+    fireEvent.change(screen.getByRole('textbox', { name: 'Поиск по имени' }), {
+        target: { value: 'ann' },
+    })
+
+    expect(screen.getByRole('article', { name: 'Игрок Anna' })).toBeVisible()
+    expect(screen.getAllByRole('article')).toHaveLength(1)
+    expect(screen.queryByRole('article', { name: 'Игрок Max' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('article', { name: 'Игрок Kate' })).not.toBeInTheDocument()
+})
+
+it('фильтр Показать онлайн скрывает Max', () => {
+    renderApp('/users')
+
+    expect(screen.getByRole('article', { name: 'Игрок Max' })).toBeVisible()
+
+    fireEvent.click(screen.getByRole('checkbox', { name: 'Показать онлайн' }))
+
+    expect(screen.queryByRole('article', { name: 'Игрок Max' })).not.toBeInTheDocument()
+    expect(screen.getByRole('article', { name: 'Игрок Anna' })).toBeVisible()
+    expect(screen.getByRole('article', { name: 'Игрок Kate' })).toBeVisible()
+    expect(screen.getAllByRole('article')).toHaveLength(2)
+})
+
+it('поиск без совпадений показывает сообщение и скрывает карточки', () => {
+    renderApp('/users')
+
+    fireEvent.change(screen.getByRole('textbox', { name: 'Поиск по имени' }), {
+        target: { value: 'Nobody' },
+    })
+
+    expect(screen.getByText('Пользователи не найдены.')).toBeVisible()
+    expect(screen.queryAllByRole('article')).toHaveLength(0)
+})
